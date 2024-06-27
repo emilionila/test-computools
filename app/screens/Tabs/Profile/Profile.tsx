@@ -3,14 +3,18 @@ import {styles} from "./styles";
 import {FIREBASE_AUTH} from "../../../../FirebaseConfig";
 import CustomButton from "../../../components/CustomButton";
 import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 
 const Profile = () => {
+    const { userData } = useSelector((state: any) => state.AuthReducers);
+
     const [name, setName] = useState("test");
     const [email, setEmail] = useState("test@");
     const [image, setImage] = useState("");
 
     useEffect(() => {
         getUserAvatar();
+        setEmail(userData.email);
     }, []);
 
     const getUserAvatar = async () => {
